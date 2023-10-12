@@ -12,7 +12,12 @@
 #ifdef __APPLE__
   #include <dispatch/dispatch.h>
 #else
+#ifndef __EMSCRIPTEN__
   #include <omp.h>
+#else
+  #define omp_get_max_threads() 1
+  #define omp_get_thread_num() 0
+#endif
 #endif
 
 #define FOR(A,X,Y) for(int Y=0;Y<A.height();Y++) for(int X=0;X<A.width();X++)
