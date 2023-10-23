@@ -21,7 +21,6 @@ project(
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(OpenMP)
-
 set(EBSYNTH_ENABLE_OPENMP OFF CACHE BOOL "Whether to enable OpenMP")
 if(OPENMP_FOUND)
     set(EBSYNTH_ENABLE_OPENMP ON)
@@ -29,11 +28,16 @@ endif()
 
 include(CheckLanguage)
 check_language(CUDA)
-
 set(EBSYNTH_ENABLE_CUDA OFF CACHE BOOL "Whether to enable CUDA")
 if(CMAKE_CUDA_COMPILER)
     enable_language(CUDA OPTIONAL)
     set(EBSYNTH_ENABLE_CUDA ON)
+endif()
+
+find_package(Halide)
+set(EBSYNTH_ENABLE_HALIDE OFF CACHE BOOL "Whether to enable Halide")
+if(Halide_FOUND)
+    set(EBSYNTH_ENABLE_HALIDE ON)
 endif()
 
 set(EBSYNTH_ENABLE_WASM_TARGETS OFF CACHE BOOL "Whether to enable WebAssembly targets")
@@ -67,6 +71,7 @@ endif()
 message(STATUS "***** ebsynth: Configuration *****")
 message(STATUS "EBSYNTH_VERSION......................................... ${CMAKE_PROJECT_VERSION}")
 message(STATUS "EBSYNTH_ENABLE_CUDA..................................... ${EBSYNTH_ENABLE_CUDA}")
+message(STATUS "EBSYNTH_ENABLE_HALIDE................................... ${EBSYNTH_ENABLE_HALIDE}")
 message(STATUS "EBSYNTH_ENABLE_OPENMP................................... ${EBSYNTH_ENABLE_OPENMP}")
 message(STATUS "EBSYNTH_ENABLE_WASM_TARGETS............................. ${EBSYNTH_ENABLE_WASM_TARGETS}")
 message(STATUS "EBSYNTH_ENABLE_TESTING.................................. ${EBSYNTH_ENABLE_TESTING}")
