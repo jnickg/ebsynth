@@ -5,6 +5,8 @@
 #ifndef EBSYNTH_H
 #define EBSYNTH_H
 
+#include "jzq.h"
+
 #ifndef EBSYNTH_API
   #ifdef WIN32
     #define EBSYNTH_API __declspec(dllimport)

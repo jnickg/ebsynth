@@ -13,9 +13,11 @@ if [ -z "$EMSDK_REPO" ]; then
     exit 1
 fi
 
-${EMSDK_REPO}/emsdk install latest
-${EMSDK_REPO}/emsdk activate latest
-source ${EMSDK_REPO}/emsdk_env.sh
+EMSDK_COMMAND="${EMSDK_REPO}/emsdk"
+
+eval ${EMSDK_COMMAND} install latest
+eval ${EMSDK_COMMAND} activate latest
+eval "source ${EMSDK_REPO}/emsdk_env.sh"
 
 # Check if EBSYNCH_VERSION is set. If not, default to 0.0.0
 if [ -z "$EBSYNTH_VERSION" ]; then
@@ -39,7 +41,7 @@ emcmake cmake \
   -DCMAKE_BUILD_TYPE=Release \
   ../.. 2>&1
 
-emmake make ebsynth VERBOSE=1 -j 4 2>&1
+emmake make websynth VERBOSE=1 -j 4 2>&1
 
 popd
 popd

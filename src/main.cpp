@@ -414,6 +414,8 @@ int main(int argc,char** argv)
     }
   }
 
+
+
   int maxPyramidLevels = 0;
   for(int level=32;level>=0;level--)
   {
